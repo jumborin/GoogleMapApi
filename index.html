@@ -1,0 +1,193 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+	<title>GoogleMapsApi TestPage</title> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+	<script type="text/javascript"> 
+		google.maps.event.addDomListener(window, 'load', function(){
+			
+			//中心経度
+			var center_lng = 136.896734;
+			
+			//中心緯度
+			var center_lat = 35.1750;
+			
+			//初期表示冶のズームレベル
+			var zoom_level = 12;								//16:　13インチ液晶で2km範囲が入るくらい。
+			
+			//地図生成用のオプション
+			var mapOptions = { 
+				center: new google.maps.LatLng(center_lat, center_lng), 
+				clickableIcons: false,
+				mapTypeControl: false,
+				mapTypeId: google.maps.MapTypeId.ROADMAP, 
+				scaleControl: true,
+				streetView: new google.maps.StreetViewPanorama(
+					document.getElementById('streetview'), {
+						addressControl: false,							//アドレス表示
+						enableCloseButton: false,						//閉じるボタン表示
+						fullscreenControl: true,						//右上の最大化ボタン表示
+						imageDateControl: true,							//画像の撮影日表示
+						position: {lat: center_lat, lng: center_lng},	//初期表示位置
+						pov: {
+							heading: 34,
+							pitch: 10
+						},
+						panControl: true,				//方位表示
+						rotateControl: false,
+						showRoadLabels: false,			//道路名表示
+						disableDoubleClickZoom: true
+					}
+				),
+				streetViewControl: true,				//ペグマン表示
+				zoom: zoom_level,						//初期表示時の地図の縮尺
+			}; 
+			
+			//地図を描画する。
+			var mapObj = new google.maps.Map(document.getElementById('googlemap'), mapOptions); 
+			
+			// ピンの場所
+			var pin_places = { 
+				list: [ 
+					{ name: "丸の内駅", latlng: new google.maps.LatLng(35.175065, 136.896734) }, 
+					{ name: "電気の科学館", latlng: new google.maps.LatLng(35.167770, 136.899347) },
+					{ name: "栄駅", latlng: new google.maps.LatLng(35.170058, 136.908420) }
+				]
+			}; 
+			
+			//マーカー作成
+			stand_pin(mapObj,pin_places);
+			
+			
+			// ポリゴンの頂点
+			var point_array = [
+					new google.maps.LatLng(35.175065, 136.896734), 
+					new google.maps.LatLng(35.175065, 136.891383), 
+					new google.maps.LatLng(35.17, 136.891383), 
+					new google.maps.LatLng(35.17, 136.896734), 
+					new google.maps.LatLng(35.175065, 136.896734)
+				];
+			var point_array2 = [
+					new google.maps.LatLng(35.175065, 136.891383), 
+					new google.maps.LatLng(35.175065, 136.886032), 
+					new google.maps.LatLng(35.17, 136.886032), 
+					new google.maps.LatLng(35.17, 136.891383), 
+					new google.maps.LatLng(35.175065, 136.891383)
+				];
+			
+			//ポリゴン作成
+			draw_polygon(mapObj,point_array);
+			draw_polygon(mapObj,point_array2);
+			
+		});
+		
+		//指定したマップの指定した場所にピンを立てる。
+		function stand_pin(mapObj,pin_places){
+			// マーカーを作成 
+			jQuery.each(pin_places.list, function(i, pin_place) { 
+				var marker = new google.maps.Marker({ 
+					clickable: true,				//マーカーのクリック許可有無
+					//icon: "http://www",			//マーカーとして使用する画像をURLで指定
+					position: pin_place.latlng, 	//マーカー表示位置
+					label: {
+						color: "#FF0000",			//ラベルの文字色
+						fontSize: "3px",			//ラベルの文字サイズ
+						text: "123456"				//ラベルとして表示する文字
+					},
+					map: mapObj, 
+					title: pin_place.name
+				});
+				
+				//ピンをクリックした際のイベント定義
+				google.maps.event.addListener(marker, 'click', (function(){
+					
+					//対象のマーカーを中心表示にする。
+					marker.getMap().setCenter(marker.getPosition());
+					
+					//対象のマーカーに吹き出し表示する。
+					//var infowindow = new google.maps.InfoWindow({
+					//	content: "このマーカーのIDは" + marker.getTitle() + marker.getLabel().text
+					//});
+					//infowindow.open(mapObj, marker);
+				}));
+			});
+		};
+		
+		// 指定したマップに対し、指定した座標を頂点に持つ4角形ポリゴンを描画する。
+		function draw_polygon(mapObj,point_array){
+			
+			// ポリゴンのオプションを設定 
+			var polygonOptions = { 
+				fillColor: "#008000",	//背景色
+				fillOpacity: 0.1,       //背景色の透明度
+				map: mapObj,			//ポリゴンを描画するマップオブジェクト
+				path: point_array,		//作成するポリゴンの頂点座標の配列
+				strokeColor: "#0000ff", //境界線の色
+				strokeOpacity: 0.5, 	//境界線の透明度
+				strokeWeight: 3 		//境界線の太さ
+			}; 
+			
+			// ポリゴンを設定 
+			var polygon = new google.maps.Polygon(polygonOptions); 
+			
+			//ポリゴンをクリックした際のイベント定義
+			google.maps.event.addListener(polygon, 'click', (function(){
+				//縮尺変更して、ポリゴンの1個目のポイントを中心表示とする。
+				var temp_array = polygon.getPath().getArray();
+				console.log("緯度：" + temp_array[0].lng() + "経度：" + temp_array[0].lat() + " へ移動");
+				polygon.getMap().setCenter(temp_array[0]);
+				polygon.getMap().setZoom(16);
+			}));
+		};
+		
+		//GoogleMap表示ボタンクリック時の処理
+		function googlemapbutton(){
+			console.log("googlemapbutton");
+			$('.googlemap').show();
+			$('.streetview').hide();
+		};
+		
+		//2画面表示ボタンクリック時の処理
+		function normalbutton(){
+			console.log("normalbutton");
+			$('.googlemap').show();
+			$('.streetview').show();
+		};
+		
+		//StreetView表示ボタンクリック時の処理
+		function streetviewbutton(){
+			console.log("streetviewbutton");
+			$('.googlemap').hide();
+			$('.streetview').show();
+		};
+		
+	</script> 
+</head> 
+<body>
+	<div align="center">
+		<button onClick="googlemapbutton();">googlemap表示</button>
+		<button onClick="normalbutton()">2画面表示</button>
+		<button onClick="streetviewbutton();">ストリートビュー表示</button>
+	</div>
+	<table style="width: 100%;">
+		<thead>
+			<tr>
+				<th class="googlemap">GoogleMap(地図)</th>
+				<th class="streetview">ストリートビュー</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="googlemap">
+					<div id="googlemap" class="googlemap" style="width: 100%; height: 550px; border: 1px solid Gray;"></div>
+				</td>
+				<td class="streetview">
+					<div id="streetview" class="streetview" style="width: 100%; height: 550px; border: 1px solid Gray;"></div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body> 
+</html> 
