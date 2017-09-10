@@ -3,6 +3,18 @@
 //共通で使用する定数を入れておくファイル。
 //
 
+//地図オブジェクト
+var mapObj;
+
+//マーカーを管理するためのリスト
+var marker_list = new google.maps.MVCArray();
+
+//ポリゴンを管理するためのリスト
+var polygon_list = new google.maps.MVCArray();
+
+//ポリゴンの中心文字マーカーを管理するためのリスト
+var polygon_marker_list = new google.maps.MVCArray();
+
 //中心経度
 var center_lng = 136.896734;
 

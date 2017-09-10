@@ -33,13 +33,13 @@ google.maps.event.addDomListener(window, 'load', function(){
 	}; 
 
 	//地図を描画する。
-	var mapObj = new google.maps.Map(document.getElementById('googlemap'), mapOptions); 
+	mapObj = new google.maps.Map(document.getElementById('googlemap'), mapOptions); 
 
 	//マーカー作成
-	standPin(mapObj,pin_places);
+	standPin(pin_places);
 
 	//ポリゴン作成
-	drawPolygon(mapObj,point_array);
-	drawPolygon(mapObj,point_array2);
+	drawPolygon(point_array,"001");
+	drawPolygon(point_array2,"002");
 
 });

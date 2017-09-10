@@ -1,6 +1,7 @@
 //指定したマップの指定した場所にピンを立てる。
-function standPin(mapObj,pin_places){
-	// マーカーを作成 
+function standPin(pin_places){
+	// マーカーを作成
+	//marker_list = new google.maps.MVCArray();
 	jQuery.each(pin_places.list, function(i, pin_place) { 
 		var marker = new google.maps.Marker({ 
 			clickable: true,										//マーカーのクリック許可有無
@@ -13,42 +14,42 @@ function standPin(mapObj,pin_places){
 			},
 			map: mapObj, 
 			title: pin_place.name
-	});
+		});
+		marker_list.push(marker);
 
-	//マーカーをクリックした際のイベント定義
-	google.maps.event.addListener(marker, 'click', (function(){
-		
-		//対象のマーカーを中心表示にする。
-		marker.getMap().setCenter(marker.getPosition());
-		
-		//対象のマーカーに吹き出し表示する。
-		//var infowindow = new google.maps.InfoWindow({
-			//	content: "このマーカーのIDは" + marker.getTitle() + marker.getLabel().text
-		//});
-		//infowindow.open(mapObj, marker);
+		//マーカーをクリックした際のイベント定義
+		google.maps.event.addListener(marker, 'click', (function(){
+			
+			//対象のマーカーを中心表示にする。
+			marker.getMap().setCenter(marker.getPosition());
+			
+			//対象のマーカーに吹き出し表示する。
+			//var infowindow = new google.maps.InfoWindow({
+				//	content: "このマーカーのIDは" + marker.getTitle() + marker.getLabel().text
+			//});
+			//infowindow.open(mapObj, marker);
 		}));
 	});
 };
 
 //指定したマップの指定した場所に文字を表示する。
-function dispCharacter(mapObj,str_place){
+function dispCharacter(str_place){
 	// マーカーを作成 
 	var marker = new google.maps.Marker({ 
-		clickable: true,										//マーカーのクリック許可有無
 		icon: ".unvisible.png",									//マーカーとして使用する画像をURLで指定
 		position: str_place.latlng, 							//マーカー表示位置
 		label: {
 			color: "#FF0000",									//ラベルの文字色
-			fontSize: "18px",									//ラベルの文字サイズ
+			fontSize: "14px",									//ラベルの文字サイズ
 			text: str_place.text								//ラベルとして表示する文字
 		},
-		map: mapObj, 
-		title: ""
+		map: mapObj
 	});
+	polygon_marker_list.push(marker);
 };
 
 // 指定したマップに対し、指定した座標を頂点に持つ4角形ポリゴンを描画する。
-function drawPolygon(mapObj,point_array,str){
+function drawPolygon(point_array,str_text){
 	
 	// ポリゴンのオプションを設定 
 	var polygonOptions = { 
@@ -65,15 +66,16 @@ function drawPolygon(mapObj,point_array,str){
 	var polygon = new google.maps.Polygon(polygonOptions);
 	
 	//文字表示
-	var str_place = {latlng: calcCenterPoint(point_array), text: "113"};
-	dispCharacter(polygon.getMap(), str_place);
+	var latlng = calcCenterPoint(point_array);
+	var str_place = {latlng: latlng, text: str_text};
+	dispCharacter(str_place);
+	polygon_list.push(polygon);
 	
 	//ポリゴンをクリックした際のイベント定義
 	google.maps.event.addListener(polygon, 'click', (function(){
-		//縮尺変更して、ポリゴンの1個目のポイントを中心表示とする。
-		var temp_array = polygon.getPath().getArray();
-		console.log("緯度：" + temp_array[0].lng() + "経度：" + temp_array[0].lat() + " へ移動");
-		polygon.getMap().setCenter(temp_array[0]);
+		//縮尺変更して、ポリゴンの中心を中心表示とする。
+		console.log("緯度：" + latlng.lng() + "経度：" + latlng.lat() + " へ移動");
+		polygon.getMap().setCenter(latlng);
 		polygon.getMap().setZoom(16);
 	}));
 };
@@ -88,4 +90,32 @@ function calcCenterPoint(point_array){
 		lng = lng + point.lng();
 	});
 	return new google.maps.LatLng(lat/point_array.length, lng/point_array.length);
+};
+
+function clearAllMarker(){
+	marker_list.forEach(function(marker, idx) {
+		marker.setMap(null);
+	});
+};
+function dispAllMarker(){
+	marker_list.forEach(function(marker, idx) {
+		marker.setMap(mapObj);
+	});
+};
+
+function clearAllPolygon(){
+	polygon_list.forEach(function(polygon, idx) {
+		polygon.setMap(null);
+	});
+	polygon_marker_list.forEach(function(marker, idx) {
+		marker.setMap(null);
+	});
+};
+function dispAllPolygon(){
+	polygon_list.forEach(function(polygon, idx) {
+		polygon.setMap(mapObj);
+	});
+	polygon_marker_list.forEach(function(marker, idx) {
+		marker.setMap(mapObj);
+	});
 };

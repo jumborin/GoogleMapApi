@@ -18,3 +18,24 @@ function streetviewButton(){
 	$('.googlemap').hide();
 	$('.streetview').show();
 };
+
+
+//マーカー非表示ボタンクリック時の処理
+function clearAllMarkerButton(){
+	clearAllMarker();
+};
+
+//マーカー表示ボタンクリック時の処理
+function dispAllMarkerButton(){
+	dispAllMarker();
+};
+
+//ポリゴン非表示ボタンクリック時の処理
+function clearAllPolygonButton(){
+	clearAllPolygon();
+};
+
+//ポリゴン表示ボタンクリック時の処理
+function dispAllPolygonButton(){
+	dispAllPolygon();
+};
