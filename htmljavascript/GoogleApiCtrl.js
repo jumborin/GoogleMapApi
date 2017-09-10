@@ -1,7 +1,6 @@
 //指定したマップの指定した場所にピンを立てる。
 function standPin(pin_places){
 	// マーカーを作成
-	//marker_list = new google.maps.MVCArray();
 	jQuery.each(pin_places.list, function(i, pin_place) { 
 		var marker = new google.maps.Marker({ 
 			clickable: true,										//マーカーのクリック許可有無
@@ -82,6 +81,7 @@ function drawPolygon(point_array,str_text){
 
 // ポリゴンの中心座標を返却する。
 function calcCenterPoint(point_array){
+	var zure = 0.0005;
 	var lat = 0.0;
 	var lng = 0.0;
 	point_array.pop();
@@ -89,20 +89,24 @@ function calcCenterPoint(point_array){
 		lat = lat + point.lat();
 		lng = lng + point.lng();
 	});
-	return new google.maps.LatLng(lat/point_array.length, lng/point_array.length);
+	return new google.maps.LatLng(lat/point_array.length - zure, lng/point_array.length);
 };
 
+//マーカーを全て非表示にする。
 function clearAllMarker(){
 	marker_list.forEach(function(marker, idx) {
 		marker.setMap(null);
 	});
 };
+
+//マーカを全て再表示する。
 function dispAllMarker(){
 	marker_list.forEach(function(marker, idx) {
 		marker.setMap(mapObj);
 	});
 };
 
+//ポリゴンを全て非表示にする。
 function clearAllPolygon(){
 	polygon_list.forEach(function(polygon, idx) {
 		polygon.setMap(null);
@@ -111,6 +115,8 @@ function clearAllPolygon(){
 		marker.setMap(null);
 	});
 };
+
+//ポリゴンを全て再表示する。
 function dispAllPolygon(){
 	polygon_list.forEach(function(polygon, idx) {
 		polygon.setMap(mapObj);
