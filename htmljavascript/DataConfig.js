@@ -15,9 +15,9 @@ var zoom_level = 12;		//16:　13インチ液晶で2km範囲が入るくらい。
 // ピン(マーカー)の場所
 var pin_places = { 
 	list: [ 
-		{ name: "丸の内駅", latlng: new google.maps.LatLng(35.175065, 136.896734) }, 
-		{ name: "電気の科学館", latlng: new google.maps.LatLng(35.167770, 136.899347) },
-		{ name: "栄駅", latlng: new google.maps.LatLng(35.170058, 136.908420) }
+		{ name: "丸の内駅", latlng: new google.maps.LatLng(35.175065, 136.896734), text: "123451" }, 
+		{ name: "電気の科学館", latlng: new google.maps.LatLng(35.167770, 136.899347), text: "123452" },
+		{ name: "栄駅", latlng: new google.maps.LatLng(35.170058, 136.908420), text: "123453" }
 	]
 };
 

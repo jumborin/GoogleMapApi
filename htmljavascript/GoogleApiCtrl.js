@@ -4,12 +4,12 @@ function standPin(mapObj,pin_places){
 	jQuery.each(pin_places.list, function(i, pin_place) { 
 		var marker = new google.maps.Marker({ 
 			clickable: true,										//マーカーのクリック許可有無
-			//icon: "http://www",									//マーカーとして使用する画像をURLで指定
+			//icon: ".unvisible.png",									//マーカーとして使用する画像をURLで指定
 			position: pin_place.latlng, 							//マーカー表示位置
 			label: {
 				color: "#FF0000",									//ラベルの文字色
 				fontSize: "3px",									//ラベルの文字サイズ
-				text: "123456"										//ラベルとして表示する文字
+				text: pin_place.text										//ラベルとして表示する文字
 			},
 			map: mapObj, 
 			title: pin_place.name
@@ -30,8 +30,25 @@ function standPin(mapObj,pin_places){
 	});
 };
 
+//指定したマップの指定した場所に文字を表示する。
+function dispCharacter(mapObj,str_place){
+	// マーカーを作成 
+	var marker = new google.maps.Marker({ 
+		clickable: true,										//マーカーのクリック許可有無
+		icon: ".unvisible.png",									//マーカーとして使用する画像をURLで指定
+		position: str_place.latlng, 							//マーカー表示位置
+		label: {
+			color: "#FF0000",									//ラベルの文字色
+			fontSize: "18px",									//ラベルの文字サイズ
+			text: str_place.text								//ラベルとして表示する文字
+		},
+		map: mapObj, 
+		title: ""
+	});
+};
+
 // 指定したマップに対し、指定した座標を頂点に持つ4角形ポリゴンを描画する。
-function drawPolygon(mapObj,point_array){
+function drawPolygon(mapObj,point_array,str){
 	
 	// ポリゴンのオプションを設定 
 	var polygonOptions = { 
@@ -45,7 +62,11 @@ function drawPolygon(mapObj,point_array){
 	}; 
 	
 	// ポリゴンを設定 
-	var polygon = new google.maps.Polygon(polygonOptions); 
+	var polygon = new google.maps.Polygon(polygonOptions);
+	
+	//文字表示
+	var str_place = {latlng: calcCenterPoint(point_array), text: "113"};
+	dispCharacter(polygon.getMap(), str_place);
 	
 	//ポリゴンをクリックした際のイベント定義
 	google.maps.event.addListener(polygon, 'click', (function(){
@@ -55,4 +76,16 @@ function drawPolygon(mapObj,point_array){
 		polygon.getMap().setCenter(temp_array[0]);
 		polygon.getMap().setZoom(16);
 	}));
+};
+
+// ポリゴンの中心座標を返却する。
+function calcCenterPoint(point_array){
+	var lat = 0.0;
+	var lng = 0.0;
+	point_array.pop();
+	jQuery.each(point_array, function(i, point) {
+		lat = lat + point.lat();
+		lng = lng + point.lng();
+	});
+	return new google.maps.LatLng(lat/point_array.length, lng/point_array.length);
 };
