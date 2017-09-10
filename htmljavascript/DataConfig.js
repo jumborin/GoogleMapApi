@@ -23,16 +23,16 @@ var pin_places = {
 
 // ポリゴンの頂点
 var point_array = [
-		new google.maps.LatLng(35.175065, 136.896734), 
-		new google.maps.LatLng(35.175065, 136.891383), 
-		new google.maps.LatLng(35.17, 136.891383), 
-		new google.maps.LatLng(35.17, 136.896734), 
-		new google.maps.LatLng(35.175065, 136.896734)
-	];
+	new google.maps.LatLng(35.175065, 136.896734), 
+	new google.maps.LatLng(35.175065, 136.891383), 
+	new google.maps.LatLng(35.17, 136.891383), 
+	new google.maps.LatLng(35.17, 136.896734), 
+	new google.maps.LatLng(35.175065, 136.896734)
+];
 var point_array2 = [
-		new google.maps.LatLng(35.175065, 136.891383), 
-		new google.maps.LatLng(35.175065, 136.886032), 
-		new google.maps.LatLng(35.17, 136.886032), 
-		new google.maps.LatLng(35.17, 136.891383), 
-		new google.maps.LatLng(35.175065, 136.891383)
-	];
+	new google.maps.LatLng(35.175065, 136.891383), 
+	new google.maps.LatLng(35.175065, 136.886032), 
+	new google.maps.LatLng(35.17, 136.886032), 
+	new google.maps.LatLng(35.17, 136.891383), 
+	new google.maps.LatLng(35.175065, 136.891383)
+];
