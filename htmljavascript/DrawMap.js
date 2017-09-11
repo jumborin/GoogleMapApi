@@ -1,3 +1,4 @@
+"use strict";
 //
 //DrawMap.js
 //画面描画時に実行する処理を記述するファイル
@@ -35,11 +36,19 @@ google.maps.event.addDomListener(window, 'load', function(){
 	//地図を描画する。
 	mapObj = new google.maps.Map(document.getElementById('googlemap'), mapOptions); 
 
-	//マーカー作成
-	standPin(pin_places);
+	//マーカー情報をどこからか取得する。
+	setMarkerInfo();
+	
+	//GoogleMapApiを使って地図上にマーカーを表示する
+	standPin();
 
-	//ポリゴン作成
+	//GoogleMapApiを使って地図上にポリゴンを表示する。
 	drawPolygon(point_array,"001");
 	drawPolygon(point_array2,"002");
 
 });
+
+//データを取得し、マーカー情報をセットする。
+function setMarkerInfo(){
+	pin_places = pin_places;
+};

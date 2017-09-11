@@ -1,5 +1,7 @@
-//指定したマップの指定した場所にピンを立てる。
-function standPin(pin_places){
+"use strict";
+
+//マップにピンを立てる。(pin_placesとmapObjが定義されていること)
+function standPin(){
 	// マーカーを作成
 	jQuery.each(pin_places.list, function(i, pin_place) { 
 		var marker = new google.maps.Marker({ 

@@ -1,3 +1,4 @@
+"use strict";
 //
 //DataConfig.js
 //共通で使用する定数を入れておくファイル。
