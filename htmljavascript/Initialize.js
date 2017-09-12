@@ -5,20 +5,20 @@
 //
 google.maps.event.addDomListener(window, 'load', function(){
 
+	//中心座標を設定する。
+	findCenterPosition();
+	
+	//マーカーを検索する。
+	findMarkerPosition();
+	
 	//地図生成用のオプション
-	var mapOptions = { 
-		center: new google.maps.LatLng(center_lat, center_lng), 
-		clickableIcons: false,
-		mapTypeControl: false,
-		mapTypeId: google.maps.MapTypeId.ROADMAP, 
-		scaleControl: true,
-		streetView: new google.maps.StreetViewPanorama(
+	streetViewPanorama = new google.maps.StreetViewPanorama(
 			document.getElementById('streetview'), {
 				addressControl: false,							//アドレス表示
 				enableCloseButton: false,						//閉じるボタン表示
 				fullscreenControl: true,						//右上の最大化ボタン表示
 				imageDateControl: true,							//画像の撮影日表示
-				position: {lat: center_lat, lng: center_lng},	//初期表示位置
+				position: {lat: centerLat, lng: centerLng},	//初期表示位置
 				pov: {
 					heading: 34,
 					pitch: 10
@@ -28,7 +28,14 @@ google.maps.event.addDomListener(window, 'load', function(){
 				showRoadLabels: false,							//道路名表示
 				disableDoubleClickZoom: true
 			}
-		),
+		);
+	var mapOptions = { 
+		center: new google.maps.LatLng(centerLat, centerLng), 
+		clickableIcons: false,
+		mapTypeControl: false,
+		mapTypeId: google.maps.MapTypeId.ROADMAP, 
+		scaleControl: true,
+		streetView: streetViewPanorama,
 		streetViewControl: true,								//ペグマン表示
 		zoom: zoom_level,										//初期表示時の地図の縮尺
 	}; 
@@ -47,8 +54,3 @@ google.maps.event.addDomListener(window, 'load', function(){
 	drawPolygon(point_array2,"002");
 
 });
-
-//データを取得し、マーカー情報をセットする。
-function setMarkerInfo(){
-	pin_places = pin_places;
-};
