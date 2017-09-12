@@ -3,13 +3,13 @@
 /**
  * GoogleApiCtrl.js
  * GoogleMapApiに関連する処理を記述するファイル
-**/
+ */
 
 /**
  * 
  * 引数で指定したIDのDIVタグにGoogleMapとストリートビューを描画する。
  *
-**/
+ */
 function drawMapAndStreetView(googleMapDivId,streetViewDivId){
 	//地図生成用のオプション
 	streetViewPanorama = new google.maps.StreetViewPanorama(
@@ -48,7 +48,7 @@ function drawMapAndStreetView(googleMapDivId,streetViewDivId){
  * 
  * GoogleMapApiを使用し、GoogleMap上にマーカーを表示する。(pin_placesとmapObjが定義されていること)
  *
-**/
+ */
 function standMarker(){
 	// マーカーを作成
 	jQuery.each(pin_places.list, function(i, pin_place) { 
@@ -85,7 +85,7 @@ function standMarker(){
  * 
  * 指定したマップの指定した場所に文字を表示する。
  *
-**/
+ */
 function dispCharacter(str_place){
 	// マーカーを作成 
 	var marker = new google.maps.Marker({ 
@@ -105,7 +105,7 @@ function dispCharacter(str_place){
  * 
  * 指定したマップに対し、指定した座標を頂点に持つ4角形ポリゴンを描画する。
  *
-**/
+ */
 function drawPolygon(point_array,str_text){
 	
 	// ポリゴンのオプションを設定 
@@ -141,7 +141,7 @@ function drawPolygon(point_array,str_text){
  * 
  * ポリゴンの中心座標を返却する。
  *
-**/
+ */
 function calcCenterPoint(point_array){
 	var zure = 0.0005;
 	var lat = 0.0;
@@ -158,7 +158,7 @@ function calcCenterPoint(point_array){
  * 
  * GoogleMapとストリートビューの画面リサイズ時の共通処理
  *
-**/
+ */
 function resizeCommonProcess(){
 	var center = mapObj.getCenter();
 	google.maps.event.trigger(mapObj, "resize");
@@ -170,7 +170,7 @@ function resizeCommonProcess(){
  * 
  * GoogleMap上に表示していたマーカーを全て非表示にする。
  *
-**/
+ */
 function clearAllMarker(){
 	marker_list.forEach(function(marker, idx) {
 		marker.setMap(null);
@@ -181,7 +181,7 @@ function clearAllMarker(){
  * 
  * GoogleMap上に表示していたマーカーを全て再表示する。
  *
-**/
+ */
 function dispAllMarker(){
 	marker_list.forEach(function(marker, idx) {
 		marker.setMap(mapObj);
@@ -192,7 +192,7 @@ function dispAllMarker(){
  * 
  * GoogleMap上に表示していたポリゴンを全て非表示にする。
  *
-**/
+ */
 function clearAllPolygon(){
 	polygon_list.forEach(function(polygon, idx) {
 		polygon.setMap(null);
@@ -206,7 +206,7 @@ function clearAllPolygon(){
  * 
  * GoogleMap上に表示していたポリゴンを全て再表示する。
  *
-**/
+ */
 function dispAllPolygon(){
 	polygon_list.forEach(function(polygon, idx) {
 		polygon.setMap(mapObj);

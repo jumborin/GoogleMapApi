@@ -3,7 +3,7 @@
 /**
  * Initialize.js
  * 画面描画時に実行する処理を記述するファイル
-**/
+ */
 google.maps.event.addDomListener(window, 'load', function(){
 
 	//データ取得

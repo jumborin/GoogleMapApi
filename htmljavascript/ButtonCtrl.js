@@ -1,5 +1,15 @@
 "use strict";
-//GoogleMap表示ボタンクリック時の処理
+
+/**
+ * ButtonCtrl.js
+ * ボタンクリック時の操作を記述するファイル
+ */
+ 
+/**
+ * 
+ * GoogleMap表示ボタンクリック時の処理。
+ *
+ */
 function googleMapButton(){
 	console.log("googlemapbutton");
 	$(".googlemap").show();
@@ -12,7 +22,11 @@ function googleMapButton(){
 	resizeCommonProcess();
 };
 
-//2画面表示ボタンクリック時の処理
+/**
+ * 
+ * 2画面表示ボタンクリック時の処理。
+ *
+ */
 function normalButton(){
 	console.log("normalbutton");
 	$(".googlemap").show();
@@ -25,7 +39,11 @@ function normalButton(){
 	resizeCommonProcess();
 };
 
-//StreetView表示ボタンクリック時の処理
+/**
+ * 
+ * StreetView表示ボタンクリック時の処理。
+ *
+ */
 function streetviewButton(){
 	console.log("streetviewbutton");
 	$(".googlemap").hide();
@@ -39,22 +57,38 @@ function streetviewButton(){
 };
 
 
-//マーカー非表示ボタンクリック時の処理
+/**
+ * 
+ * マーカー非表示ボタンクリック時の処理。
+ *
+ */
 function clearAllMarkerButton(){
 	clearAllMarker();
 };
 
-//マーカー表示ボタンクリック時の処理
+/**
+ * 
+ * マーカー表示ボタンクリック時の処理。
+ *
+ */
 function dispAllMarkerButton(){
 	dispAllMarker();
 };
 
-//ポリゴン非表示ボタンクリック時の処理
+/**
+ * 
+ * ポリゴン非表示ボタンクリック時の処理。
+ *
+ */
 function clearAllPolygonButton(){
 	clearAllPolygon();
 };
 
-//ポリゴン表示ボタンクリック時の処理
+/**
+ * 
+ * ポリゴン表示ボタンクリック時の処理。
+ *
+ */
 function dispAllPolygonButton(){
 	dispAllPolygon();
 };

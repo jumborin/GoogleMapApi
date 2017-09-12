@@ -1,8 +1,9 @@
 "use strict";
-//
-//DataConfig.js
-//共通で使用する定数を入れておくファイル。
-//
+
+/**
+ * DataConfig.js
+ * 共通で使用する定数を入れておくファイル。
+ */
 
 //地図オブジェクト
 var mapObj;
