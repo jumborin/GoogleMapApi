@@ -33,23 +33,17 @@ function findMarkerPosition(){
  *
  */
 function findPolygonPosition(){
-	point_array = [
+	polygonArrayArray = [[[
 		new google.maps.LatLng(35.175065, 136.896734), 
 		new google.maps.LatLng(35.175065, 136.891383), 
 		new google.maps.LatLng(35.17, 136.891383), 
 		new google.maps.LatLng(35.17, 136.896734), 
 		new google.maps.LatLng(35.175065, 136.896734)
-	];
-	point_array2 = [
+	],"001"],[[
 		new google.maps.LatLng(35.175065, 136.891383), 
 		new google.maps.LatLng(35.175065, 136.886032), 
 		new google.maps.LatLng(35.17, 136.886032), 
 		new google.maps.LatLng(35.17, 136.891383), 
 		new google.maps.LatLng(35.175065, 136.891383)
-	];
+	],"002"]];
 };
-
-
-
-
-

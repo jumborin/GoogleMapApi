@@ -106,35 +106,37 @@ function dispCharacter(str_place){
  * 指定したマップに対し、指定した座標を頂点に持つ4角形ポリゴンを描画する。
  *
  */
-function drawPolygon(point_array,str_text){
+function drawPolygon(polygonArrayArray){
+	jQuery.each(polygonArrayArray, function(i, polygonArray) { 
 	
-	// ポリゴンのオプションを設定 
-	var polygonOptions = { 
-		fillColor: "#008000",								//背景色
-		fillOpacity: 0.1,									//背景色の透明度
-		map: mapObj,										//ポリゴンを描画するマップオブジェクト
-		path: point_array,									//作成するポリゴンの頂点座標の配列
-		strokeColor: "#0000ff", 							//境界線の色
-		strokeOpacity: 0.5, 								//境界線の透明度
-		strokeWeight: 3										//境界線の太さ
-	}; 
-	
-	// ポリゴンを設定 
-	var polygon = new google.maps.Polygon(polygonOptions);
-	
-	//文字表示
-	var latlng = calcCenterPoint(point_array);
-	var str_place = {latlng: latlng, text: str_text};
-	dispCharacter(str_place);
-	polygon_list.push(polygon);
-	
-	//ポリゴンをクリックした際のイベント定義
-	google.maps.event.addListener(polygon, 'click', (function(){
-		//縮尺変更して、ポリゴンの中心を中心表示とする。
-		console.log("緯度：" + latlng.lng() + "経度：" + latlng.lat() + " へ移動");
-		polygon.getMap().setCenter(latlng);
-		polygon.getMap().setZoom(CONST_MAP_EXPANSION_ZOOM_LEVEL);
-	}));
+		// ポリゴンのオプションを設定 
+		var polygonOptions = { 
+			fillColor: "#008000",								//背景色
+			fillOpacity: 0.1,									//背景色の透明度
+			map: mapObj,										//ポリゴンを描画するマップオブジェクト
+			path: polygonArray[0],									//作成するポリゴンの頂点座標の配列
+			strokeColor: "#0000ff", 							//境界線の色
+			strokeOpacity: 0.5, 								//境界線の透明度
+			strokeWeight: 3										//境界線の太さ
+		}; 
+		
+		// ポリゴンを設定 
+		var polygon = new google.maps.Polygon(polygonOptions);
+		
+		//文字表示
+		var latlng = calcCenterPoint(polygonArray[0]);
+		var str_place = {latlng: latlng, text: polygonArray[1]};
+		dispCharacter(str_place);
+		polygon_list.push(polygon);
+		
+		//ポリゴンをクリックした際のイベント定義
+		google.maps.event.addListener(polygon, 'click', (function(){
+			//縮尺変更して、ポリゴンの中心を中心表示とする。
+			console.log("緯度：" + latlng.lng() + "経度：" + latlng.lat() + " へ移動");
+			polygon.getMap().setCenter(latlng);
+			polygon.getMap().setZoom(CONST_MAP_EXPANSION_ZOOM_LEVEL);
+		}));
+	});
 };
 
 /**
@@ -142,16 +144,16 @@ function drawPolygon(point_array,str_text){
  * ポリゴンの中心座標を返却する。
  *
  */
-function calcCenterPoint(point_array){
+function calcCenterPoint(polygonArray){
 	var zure = 0.0005;
 	var lat = 0.0;
 	var lng = 0.0;
-	point_array.pop();
-	jQuery.each(point_array, function(i, point) {
+	polygonArray.pop();
+	jQuery.each(polygonArray, function(i, point) {
 		lat = lat + point.lat();
 		lng = lng + point.lng();
 	});
-	return new google.maps.LatLng(lat/point_array.length - zure, lng/point_array.length);
+	return new google.maps.LatLng(lat/polygonArray.length - zure, lng/polygonArray.length);
 };
 
 /**

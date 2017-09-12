@@ -24,7 +24,6 @@ google.maps.event.addDomListener(window, 'load', function(){
 	standMarker();
 
 	//GoogleMapApiを使って地図上にポリゴンを表示する。
-	drawPolygon(point_array,"001");
-	drawPolygon(point_array2,"002");
+	drawPolygon(polygonArrayArray);
 
 });

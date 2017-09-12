@@ -30,9 +30,8 @@ var centerLat;
 // ピン(マーカー)の場所
 var pin_places;
 
-// ポリゴンの頂点
-var point_array;
-var point_array2;
+// ポリゴンの頂点の配列とポリゴンの中心に表示する文字が入った配列
+var polygonArrayArray;
 
 
 //縮小時のズームレベル
