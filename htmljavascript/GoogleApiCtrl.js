@@ -1,7 +1,43 @@
 "use strict";
 
-//マップにピンを立てる。(pin_placesとmapObjが定義されていること)
-function standPin(){
+
+//マップを描画する。
+function drawMapAndStreetView(googleMapDivId,streetViewDivId){
+	//地図生成用のオプション
+	streetViewPanorama = new google.maps.StreetViewPanorama(
+			document.getElementById(streetViewDivId), {
+				addressControl: false,							//アドレス表示
+				enableCloseButton: false,						//閉じるボタン表示
+				fullscreenControl: true,						//右上の最大化ボタン表示
+				imageDateControl: true,							//画像の撮影日表示
+				position: {lat: centerLat, lng: centerLng},	//初期表示位置
+				pov: {
+					heading: 34,
+					pitch: 10
+				},
+				panControl: true,								//方位表示
+				rotateControl: false,
+				showRoadLabels: false,							//道路名表示
+				disableDoubleClickZoom: true
+			}
+		);
+	var mapOptions = { 
+		center: new google.maps.LatLng(centerLat, centerLng), 
+		clickableIcons: false,
+		mapTypeControl: false,
+		mapTypeId: google.maps.MapTypeId.ROADMAP, 
+		scaleControl: true,
+		streetView: streetViewPanorama,
+		streetViewControl: true,								//ペグマン表示
+		zoom: CONST_MAP_SHRINK_ZOOM_LEVEL,						//初期表示時の地図の縮尺
+	}; 
+
+	//地図を描画する。
+	mapObj = new google.maps.Map(document.getElementById(googleMapDivId), mapOptions);
+};
+
+//マップにマーカーを立てる。(pin_placesとmapObjが定義されていること)
+function standMarker(){
 	// マーカーを作成
 	jQuery.each(pin_places.list, function(i, pin_place) { 
 		var marker = new google.maps.Marker({ 
@@ -11,7 +47,7 @@ function standPin(){
 			label: {
 				color: "#FF0000",									//ラベルの文字色
 				fontSize: "3px",									//ラベルの文字サイズ
-				text: pin_place.text										//ラベルとして表示する文字
+				text: pin_place.text								//ラベルとして表示する文字
 			},
 			map: mapObj, 
 			title: pin_place.name
