@@ -6,7 +6,7 @@
  */
 
 /**
- * 初期表示時の中心座標を設定する
+ * 初期表示時の中心座標情報をセットする。
  *
  */
 function findCenterPosition(){
@@ -15,7 +15,7 @@ function findCenterPosition(){
 };
 
 /**
- * マーカーを検索する
+ * マーカー情報を検索し、マーカー情報をセットする。
  *
  */
 function findMarkerPosition(){
@@ -29,11 +29,24 @@ function findMarkerPosition(){
 };
 
 /**
- * データを取得し、マーカー情報をセットする。
+ * ポリゴン情報を検索し、ポリゴン情報をセットする。
  *
  */
-function setMarkerInfo(){
-	pin_places = pin_places;
+function findPolygonPosition(){
+	point_array = [
+		new google.maps.LatLng(35.175065, 136.896734), 
+		new google.maps.LatLng(35.175065, 136.891383), 
+		new google.maps.LatLng(35.17, 136.891383), 
+		new google.maps.LatLng(35.17, 136.896734), 
+		new google.maps.LatLng(35.175065, 136.896734)
+	];
+	point_array2 = [
+		new google.maps.LatLng(35.175065, 136.891383), 
+		new google.maps.LatLng(35.175065, 136.886032), 
+		new google.maps.LatLng(35.17, 136.886032), 
+		new google.maps.LatLng(35.17, 136.891383), 
+		new google.maps.LatLng(35.175065, 136.891383)
+	];
 };
 
 

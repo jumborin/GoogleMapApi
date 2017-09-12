@@ -5,11 +5,14 @@
 //
 google.maps.event.addDomListener(window, 'load', function(){
 
-	//中心座標を設定する。
+	//中心座標を検索する。
 	findCenterPosition();
 	
 	//マーカーを検索する。
 	findMarkerPosition();
+	
+	//ポリゴン情報を検索する。
+	findPolygonPosition();
 	
 	//地図生成用のオプション
 	streetViewPanorama = new google.maps.StreetViewPanorama(
@@ -37,14 +40,11 @@ google.maps.event.addDomListener(window, 'load', function(){
 		scaleControl: true,
 		streetView: streetViewPanorama,
 		streetViewControl: true,								//ペグマン表示
-		zoom: zoom_level,										//初期表示時の地図の縮尺
+		zoom: CONST_MAP_SHRINK_ZOOM_LEVEL,						//初期表示時の地図の縮尺
 	}; 
 
 	//地図を描画する。
 	mapObj = new google.maps.Map(document.getElementById('googlemap'), mapOptions); 
-
-	//マーカー情報をどこからか取得する。
-	setMarkerInfo();
 	
 	//GoogleMapApiを使って地図上にマーカーを表示する
 	standPin();

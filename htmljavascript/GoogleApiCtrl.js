@@ -77,7 +77,7 @@ function drawPolygon(point_array,str_text){
 		//縮尺変更して、ポリゴンの中心を中心表示とする。
 		console.log("緯度：" + latlng.lng() + "経度：" + latlng.lat() + " へ移動");
 		polygon.getMap().setCenter(latlng);
-		polygon.getMap().setZoom(16);
+		polygon.getMap().setZoom(CONST_MAP_EXPANSION_ZOOM_LEVEL);
 	}));
 };
 
