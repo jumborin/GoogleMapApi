@@ -94,6 +94,14 @@ function calcCenterPoint(point_array){
 	return new google.maps.LatLng(lat/point_array.length - zure, lng/point_array.length);
 };
 
+//GoogleMapとストリートビューの画面リサイズ時の共通処理
+function resizeCommonProcess(){
+	var center = mapObj.getCenter();
+	google.maps.event.trigger(mapObj, "resize");
+	google.maps.event.trigger(streetViewPanorama, 'resize');
+	mapObj.setCenter(center);
+};
+
 //マーカーを全て非表示にする。
 function clearAllMarker(){
 	marker_list.forEach(function(marker, idx) {
