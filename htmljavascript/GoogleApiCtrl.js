@@ -1,7 +1,15 @@
 "use strict";
 
+/**
+ * GoogleApiCtrl.js
+ * GoogleMapApiに関連する処理を記述するファイル
+**/
 
-//マップを描画する。
+/**
+ * 
+ * 引数で指定したIDのDIVタグにGoogleMapとストリートビューを描画する。
+ *
+**/
 function drawMapAndStreetView(googleMapDivId,streetViewDivId){
 	//地図生成用のオプション
 	streetViewPanorama = new google.maps.StreetViewPanorama(
@@ -36,7 +44,11 @@ function drawMapAndStreetView(googleMapDivId,streetViewDivId){
 	mapObj = new google.maps.Map(document.getElementById(googleMapDivId), mapOptions);
 };
 
-//マップにマーカーを立てる。(pin_placesとmapObjが定義されていること)
+/**
+ * 
+ * GoogleMapApiを使用し、GoogleMap上にマーカーを表示する。(pin_placesとmapObjが定義されていること)
+ *
+**/
 function standMarker(){
 	// マーカーを作成
 	jQuery.each(pin_places.list, function(i, pin_place) { 
@@ -69,7 +81,11 @@ function standMarker(){
 	});
 };
 
-//指定したマップの指定した場所に文字を表示する。
+/**
+ * 
+ * 指定したマップの指定した場所に文字を表示する。
+ *
+**/
 function dispCharacter(str_place){
 	// マーカーを作成 
 	var marker = new google.maps.Marker({ 
@@ -85,7 +101,11 @@ function dispCharacter(str_place){
 	polygon_marker_list.push(marker);
 };
 
-// 指定したマップに対し、指定した座標を頂点に持つ4角形ポリゴンを描画する。
+/**
+ * 
+ * 指定したマップに対し、指定した座標を頂点に持つ4角形ポリゴンを描画する。
+ *
+**/
 function drawPolygon(point_array,str_text){
 	
 	// ポリゴンのオプションを設定 
@@ -117,7 +137,11 @@ function drawPolygon(point_array,str_text){
 	}));
 };
 
-// ポリゴンの中心座標を返却する。
+/**
+ * 
+ * ポリゴンの中心座標を返却する。
+ *
+**/
 function calcCenterPoint(point_array){
 	var zure = 0.0005;
 	var lat = 0.0;
@@ -130,7 +154,11 @@ function calcCenterPoint(point_array){
 	return new google.maps.LatLng(lat/point_array.length - zure, lng/point_array.length);
 };
 
-//GoogleMapとストリートビューの画面リサイズ時の共通処理
+/**
+ * 
+ * GoogleMapとストリートビューの画面リサイズ時の共通処理
+ *
+**/
 function resizeCommonProcess(){
 	var center = mapObj.getCenter();
 	google.maps.event.trigger(mapObj, "resize");
@@ -138,21 +166,33 @@ function resizeCommonProcess(){
 	mapObj.setCenter(center);
 };
 
-//マーカーを全て非表示にする。
+/**
+ * 
+ * GoogleMap上に表示していたマーカーを全て非表示にする。
+ *
+**/
 function clearAllMarker(){
 	marker_list.forEach(function(marker, idx) {
 		marker.setMap(null);
 	});
 };
 
-//マーカを全て再表示する。
+/**
+ * 
+ * GoogleMap上に表示していたマーカーを全て再表示する。
+ *
+**/
 function dispAllMarker(){
 	marker_list.forEach(function(marker, idx) {
 		marker.setMap(mapObj);
 	});
 };
 
-//ポリゴンを全て非表示にする。
+/**
+ * 
+ * GoogleMap上に表示していたポリゴンを全て非表示にする。
+ *
+**/
 function clearAllPolygon(){
 	polygon_list.forEach(function(polygon, idx) {
 		polygon.setMap(null);
@@ -162,7 +202,11 @@ function clearAllPolygon(){
 	});
 };
 
-//ポリゴンを全て再表示する。
+/**
+ * 
+ * GoogleMap上に表示していたポリゴンを全て再表示する。
+ *
+**/
 function dispAllPolygon(){
 	polygon_list.forEach(function(polygon, idx) {
 		polygon.setMap(mapObj);
