@@ -4,12 +4,12 @@
  * Dao.js
  * 変数にデータをセットする処理を記述するファイル
  */
-
+var Dao = new Object();
 /**
  * 初期表示時の中心座標情報をセットする。
  *
  */
-function findCenterPosition(){
+Dao.findCenterPosition = function (){
 	centerLng = 136.896734;
 	centerLat = 35.1750;
 };
@@ -18,7 +18,7 @@ function findCenterPosition(){
  * マーカー情報を検索し、マーカー情報をセットする。
  *
  */
-function findMarkerPosition(){
+Dao.findMarkerPosition = function (){
 	pin_places = { 
 		list: [ 
 			{ name: "丸の内駅", latlng: new google.maps.LatLng(35.175065, 136.896734), text: "123451" }, 
@@ -32,7 +32,7 @@ function findMarkerPosition(){
  * ポリゴン情報を検索し、ポリゴン情報をセットする。
  *
  */
-function findPolygonPosition(){
+Dao.findPolygonPosition = function (){
 	polygonArrayArray = [[[
 		new google.maps.LatLng(35.175065, 136.896734), 
 		new google.maps.LatLng(35.175065, 136.891383), 

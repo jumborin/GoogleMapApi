@@ -8,13 +8,13 @@ google.maps.event.addDomListener(window, 'load', function(){
 
 	//データ取得
 	//中心座標を検索する。
-	findCenterPosition();
+	Dao.findCenterPosition();
 	
 	//マーカーを検索する。
-	findMarkerPosition();
+	Dao.findMarkerPosition();
 	
 	//ポリゴン情報を検索する。
-	findPolygonPosition();
+	Dao.findPolygonPosition();
 	
 	//以下GoogleMap描画
 	//GoogleMapとストリートビューを描画する。
