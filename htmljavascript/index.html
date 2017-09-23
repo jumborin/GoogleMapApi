@@ -13,25 +13,30 @@
 	<script type="text/javascript" src="./DrawMap.js"></script> 
 </head> 
 <body>
-	<table style="width: 100%;">
-		<thead>
-			<tr>
-				<th class="googlemap">GoogleMap(地図)</th>
-				<th class="streetview">ストリートビュー</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="googlemap">
-					<div id="googlemap" class="googlemap" style="width: 100%; height: 550px; border: 1px solid Gray;"></div>
-				</td>
-				<td class="streetview">
-					<div id="streetview" class="streetview" style="width: 100%; height: 550px; border: 1px solid Gray;"></div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<div align="center">
+	<div id="input_area">
+		<input id="search" type="text" placeholder="検索したい場所を入力してください" style="width: 100%;">
+	</div>
+	<div id="main_area">
+		<table style="width: 100%;">
+			<thead>
+				<tr>
+					<th class="googlemap">GoogleMap(地図)</th>
+					<th class="streetview">ストリートビュー</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="googlemap">
+						<div id="googlemap" class="googlemap" style="width: 100%; height: 550px; border: 1px solid Gray;"></div>
+					</td>
+					<td class="streetview">
+						<div id="streetview" class="streetview" style="width: 100%; height: 550px; border: 1px solid Gray;"></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="button_area" align="center">
 		<button id="google_map_button" onClick="googleMapButton();">googlemap表示</button>
 		<button id="normal_button" onClick="normalButton()">2画面表示</button>
 		<button id="street_view_button" onClick="streetviewButton();">ストリートビュー表示</button>
