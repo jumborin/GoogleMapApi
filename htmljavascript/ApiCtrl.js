@@ -48,23 +48,23 @@ var ApiCtrl = {
 	
 	/**
 	 * 
-	 * GoogleMapApiを使用し、GoogleMap上にマーカーを表示する。(pin_placesとmapObjが定義されていること)
+	 * GoogleMapApiを使用し、GoogleMap上にマーカーを表示する。(pinPlacesとmapObjが定義されていること)
 	 *
 	 */
 	standMarker: function(){
 		// マーカーを作成
-		jQuery.each(pin_places.list, function(i, pin_place) { 
+		jQuery.each(pinPlaces.list, function(i, pinPlace) { 
 			var marker = new google.maps.Marker({ 
 				clickable: true,										//マーカーのクリック許可有無
 				//icon: ".unvisible.png",									//マーカーとして使用する画像をURLで指定
-				position: pin_place.latlng, 							//マーカー表示位置
+				position: pinPlace.latlng, 							//マーカー表示位置
 				label: {
 					color: "#FF0000",									//ラベルの文字色
 					fontSize: "3px",									//ラベルの文字サイズ
-					text: pin_place.text								//ラベルとして表示する文字
+					text: pinPlace.text								//ラベルとして表示する文字
 				},
 				map: mapObj, 
-				title: pin_place.name
+				title: pinPlace.name
 			});
 			markerList.push(marker);
 

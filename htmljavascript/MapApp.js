@@ -4,9 +4,8 @@
  * MapApp.js
  * 地図アプリのメインファイル
  */
- 
 
-// 共通変数
+// グローバル変数
 var mapObj,												//地図オブジェクト
 	streetViewPanorama,									//ストリートビューオブジェクト
 	markerList			= new google.maps.MVCArray(),	//マーカーを管理するためのリスト
@@ -14,15 +13,15 @@ var mapObj,												//地図オブジェクト
 	polygonMarkerList = new google.maps.MVCArray(),	//ポリゴンの中心文字マーカーを管理するためのリスト
 	centerLng,											//中心経度
 	centerLat,											//中心緯度
-	pin_places,											// ピン(マーカー)の場所
+	pinPlaces,											// ピン(マーカー)の場所
 	polygonArrayArray;									// ポリゴンの頂点の配列とポリゴンの中心に表示する文字が入った配列
 
 
 //縮小時のズームレベル
-var CONST_MAP_SHRINK_ZOOM_LEVEL = 12;				//12:　13インチ液晶で2km範囲が入るくらい。
 
-//拡大時のズームレベル
-var CONST_MAP_EXPANSION_ZOOM_LEVEL = 16;			//16:　13インチ液晶で2km範囲が入るくらい。
+var CONST_MAP_SHRINK_ZOOM_LEVEL = 12,				//12:　13インチ液晶で2km範囲が入るくらい。
+	//拡大時のズームレベル
+	CONST_MAP_EXPANSION_ZOOM_LEVEL = 16;			//16:　13インチ液晶で2km範囲が入るくらい。
 
 /**
  * 
