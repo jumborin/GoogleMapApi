@@ -1,12 +1,12 @@
 ŒÄ‚Ño‚µæ
 
 yhtml‚ÆJavaScriptz
-index->Initialize
+index->MapApp
 index->ButtonCtrl
 
 yJavaScript‚ÆGoogleMapApiz
-Initialize->GoogleApiCtrl
-ButtonCtrl->GoogleApiCtrl
+MapApp->ApiCtrl
+ButtonCtrl->ApiCtrl
 
 yƒf[ƒ^‚ÌŽæ“¾z
-Initialize->Dao
+MapApp->Dao
