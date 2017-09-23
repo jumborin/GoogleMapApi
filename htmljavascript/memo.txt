@@ -10,6 +10,3 @@ ButtonCtrl->GoogleApiCtrl
 
 yƒf[ƒ^‚ÌŽæ“¾z
 Initialize->Dao
-
-y‚»‚Ì‘¼z
-All->DataConfig

@@ -4,13 +4,14 @@
  * ButtonCtrl.js
  * ボタンクリック時の操作を記述するファイル
  */
- 
+var ButtonCtrl = new Object();
+
 /**
  * 
  * GoogleMap表示ボタンクリック時の処理。
  *
  */
-function googleMapButton(){
+ButtonCtrl.googleMapButton = function(){
 	console.log("googlemapbutton");
 	$(".googlemap").show();
 	$(".streetview").hide();
@@ -19,7 +20,7 @@ function googleMapButton(){
 	$("#clear_all_polygon_button").prop("disabled",false);
 	$("#disp_all_polygon_button").prop("disabled",false);
 	$("#print_button").prop("disabled",true);
-	resizeCommonProcess();
+	ApiCtrl.resizeCommonProcess();
 };
 
 /**
@@ -27,7 +28,7 @@ function googleMapButton(){
  * 2画面表示ボタンクリック時の処理。
  *
  */
-function normalButton(){
+ButtonCtrl.normalButton = function(){
 	console.log("normalbutton");
 	$(".googlemap").show();
 	$(".streetview").show();
@@ -36,7 +37,7 @@ function normalButton(){
 	$("#clear_all_polygon_button").prop("disabled",false);
 	$("#disp_all_polygon_button").prop("disabled",false);
 	$("#print_button").prop("disabled",true);
-	resizeCommonProcess();
+	ApiCtrl.resizeCommonProcess();
 };
 
 /**
@@ -44,7 +45,7 @@ function normalButton(){
  * StreetView表示ボタンクリック時の処理。
  *
  */
-function streetviewButton(){
+ButtonCtrl.streetviewButton = function(){
 	console.log("streetviewbutton");
 	$(".googlemap").hide();
 	$(".streetview").show();
@@ -53,7 +54,7 @@ function streetviewButton(){
 	$("#clear_all_polygon_button").prop("disabled",true);
 	$("#disp_all_polygon_button").prop("disabled",true);
 	$("#print_button").prop("disabled",false);
-	resizeCommonProcess();
+	ApiCtrl.resizeCommonProcess();
 };
 
 
@@ -62,8 +63,8 @@ function streetviewButton(){
  * マーカー非表示ボタンクリック時の処理。
  *
  */
-function clearAllMarkerButton(){
-	clearAllMarker();
+ButtonCtrl.clearAllMarkerButton = function(){
+	ApiCtrl.clearAllMarker();
 };
 
 /**
@@ -71,8 +72,8 @@ function clearAllMarkerButton(){
  * マーカー表示ボタンクリック時の処理。
  *
  */
-function dispAllMarkerButton(){
-	dispAllMarker();
+ButtonCtrl.dispAllMarkerButton =function(){
+	ApiCtrl.dispAllMarker();
 };
 
 /**
@@ -80,8 +81,8 @@ function dispAllMarkerButton(){
  * ポリゴン非表示ボタンクリック時の処理。
  *
  */
-function clearAllPolygonButton(){
-	clearAllPolygon();
+ButtonCtrl.clearAllPolygonButton = function(){
+	ApiCtrl.clearAllPolygon();
 };
 
 /**
@@ -89,6 +90,6 @@ function clearAllPolygonButton(){
  * ポリゴン表示ボタンクリック時の処理。
  *
  */
-function dispAllPolygonButton(){
-	dispAllPolygon();
+ButtonCtrl.dispAllPolygonButton = function(){
+	ApiCtrl.dispAllPolygon();
 };

@@ -1,11 +1,17 @@
 "use strict";
 
 /**
+ *
  * Dao.js
  * 変数にデータをセットする処理を記述するファイル
+ *
  */
+ 
+//データ取得オブジェクト
 var Dao = new Object();
+
 /**
+ *
  * 初期表示時の中心座標情報をセットする。
  *
  */
@@ -15,10 +21,12 @@ Dao.findCenterPosition = function (){
 };
 
 /**
+ *
  * マーカー情報を検索し、マーカー情報をセットする。
+ * @param {array} pin_places マーカーの座標情報
  *
  */
-Dao.findMarkerPosition = function (){
+Dao.findMarkerPosition = function(){
 	pin_places = { 
 		list: [ 
 			{ name: "丸の内駅", latlng: new google.maps.LatLng(35.175065, 136.896734), text: "123451" }, 
@@ -26,26 +34,15 @@ Dao.findMarkerPosition = function (){
 			{ name: "栄駅", latlng: new google.maps.LatLng(35.170058, 136.908420), text: "123453" }
 		]
 	};
+	return pin_places;
 };
 
 /**
+ *
  * ポリゴン情報を検索し、ポリゴン情報をセットする。
  *
  */
 Dao.findPolygonPosition = function (){
-	polygonArrayArray = [[[
-		new google.maps.LatLng(35.175065, 136.896734), 
-		new google.maps.LatLng(35.175065, 136.891383), 
-		new google.maps.LatLng(35.17, 136.891383), 
-		new google.maps.LatLng(35.17, 136.896734), 
-		new google.maps.LatLng(35.175065, 136.896734)
-	],"001"],[[
-		new google.maps.LatLng(35.175065, 136.891383), 
-		new google.maps.LatLng(35.175065, 136.886032), 
-		new google.maps.LatLng(35.17, 136.886032), 
-		new google.maps.LatLng(35.17, 136.891383), 
-		new google.maps.LatLng(35.175065, 136.891383)
-	],"002"]];
 	polygonArrayArray = [
 		[[new google.maps.LatLng(35.175065, 136.896734), new google.maps.LatLng(35.175065,136.891383), new google.maps.LatLng(35.17,136.891383), new google.maps.LatLng(35.17, 136.896734), new google.maps.LatLng(35.175065, 136.896734)],"100"],
 		[[new google.maps.LatLng(35.175065, 136.891383), new google.maps.LatLng(35.175065,136.886032), new google.maps.LatLng(35.17,136.886032), new google.maps.LatLng(35.17,136.891383), new google.maps.LatLng(35.175065, 136.891383)],"101"],
@@ -110,6 +107,4 @@ Dao.findPolygonPosition = function (){
 		[[new google.maps.LatLng(35.169714, 136.741554999999), new google.maps.LatLng(35.169714,136.736204), new google.maps.LatLng(35.164649,136.736204), new google.maps.LatLng(35.164649,136.741555), new google.maps.LatLng(35.169714, 136.741555)],"229"],
 		[[new google.maps.LatLng(35.169714, 136.736203999999), new google.maps.LatLng(35.169714,136.730853), new google.maps.LatLng(35.164649,136.730853), new google.maps.LatLng(35.164649,136.736204), new google.maps.LatLng(35.169714, 136.736204)],"230"]
 	];
-
-
 };

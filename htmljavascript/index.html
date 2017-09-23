@@ -6,11 +6,9 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript" src="./Dao.js"></script> 
-	<script type="text/javascript" src="./Initialize.js"></script> 
+	<script type="text/javascript" src="./MapApp.js"></script> 
 	<script type="text/javascript" src="./ButtonCtrl.js"></script>
 	<script type="text/javascript" src="./GoogleApiCtrl.js"></script>
-	<script type="text/javascript" src="./DataConfig.js"></script>
-	<script type="text/javascript" src="./DrawMap.js"></script> 
 </head> 
 <body>
 	<div id="input_area">
@@ -37,13 +35,13 @@
 		</table>
 	</div>
 	<div id="button_area" align="center">
-		<button id="google_map_button" onClick="googleMapButton();">googlemap表示</button>
-		<button id="normal_button" onClick="normalButton()">2画面表示</button>
-		<button id="street_view_button" onClick="streetviewButton();">ストリートビュー表示</button>
-		<button id="clear_all_marker_button" onClick="clearAllMarkerButton();">マーカー非表示</button>
-		<button id="disp_all_marker_button" onClick="dispAllMarkerButton();">マーカー表示</button>
-		<button id="clear_all_polygon_button" onClick="clearAllPolygonButton();">ポリゴン非表示</button>
-		<button id="disp_all_polygon_button" onClick="dispAllPolygonButton();">ポリゴン表示</button>
+		<button id="google_map_button" onClick="ButtonCtrl.googleMapButton();">googlemap表示</button>
+		<button id="normal_button" onClick="ButtonCtrl.normalButton()">2画面表示</button>
+		<button id="street_view_button" onClick="ButtonCtrl.streetviewButton();">ストリートビュー表示</button>
+		<button id="clear_all_marker_button" onClick="ButtonCtrl.clearAllMarkerButton();">マーカー非表示</button>
+		<button id="disp_all_marker_button" onClick="ButtonCtrl.dispAllMarkerButton();">マーカー表示</button>
+		<button id="clear_all_polygon_button" onClick="ButtonCtrl.clearAllPolygonButton();">ポリゴン非表示</button>
+		<button id="disp_all_polygon_button" onClick="ButtonCtrl.dispAllPolygonButton();">ポリゴン表示</button>
 		<button id="print_button" onClick="window.print();" disabled>印刷</button>
 	</div>
 </body> 

@@ -1,16 +1,19 @@
 "use strict";
 
 /**
- * GoogleApiCtrl.js
+ * ApiCtrl.js
  * GoogleMapApiに関連する処理を記述するファイル
  */
+
+//
+var ApiCtrl = new Object();
 
 /**
  * 
  * 引数で指定したIDのDIVタグにGoogleMapとストリートビューを描画する。
  *
  */
-function drawMapAndStreetView(googleMapDivId,streetViewDivId){
+ApiCtrl.drawMapAndStreetView = function(googleMapDivId,streetViewDivId){
 	//地図生成用のオプション
 	streetViewPanorama = new google.maps.StreetViewPanorama(
 			document.getElementById(streetViewDivId), {
@@ -49,7 +52,7 @@ function drawMapAndStreetView(googleMapDivId,streetViewDivId){
  * GoogleMapApiを使用し、GoogleMap上にマーカーを表示する。(pin_placesとmapObjが定義されていること)
  *
  */
-function standMarker(){
+ApiCtrl.standMarker = function(){
 	// マーカーを作成
 	jQuery.each(pin_places.list, function(i, pin_place) { 
 		var marker = new google.maps.Marker({ 
@@ -64,7 +67,7 @@ function standMarker(){
 			map: mapObj, 
 			title: pin_place.name
 		});
-		marker_list.push(marker);
+		markerList.push(marker);
 
 		//マーカーをクリックした際のイベント定義
 		google.maps.event.addListener(marker, 'click', (function(){
@@ -86,7 +89,7 @@ function standMarker(){
  * 指定したマップの指定した場所に文字を表示する。
  *
  */
-function dispCharacter(str_place){
+ApiCtrl.dispCharacter = function(str_place){
 	// マーカーを作成 
 	var marker = new google.maps.Marker({ 
 		icon: ".unvisible.png",									//マーカーとして使用する画像をURLで指定
@@ -98,7 +101,7 @@ function dispCharacter(str_place){
 		},
 		map: mapObj
 	});
-	polygon_marker_list.push(marker);
+	polygonMarkerList.push(marker);
 };
 
 /**
@@ -106,7 +109,7 @@ function dispCharacter(str_place){
  * 指定したマップに対し、指定した座標を頂点に持つ4角形ポリゴンを描画する。
  *
  */
-function drawPolygon(polygonArrayArray){
+ApiCtrl.drawPolygon = function(polygonArrayArray){
 	jQuery.each(polygonArrayArray, function(i, polygonArray) { 
 	
 		// ポリゴンのオプションを設定 
@@ -124,10 +127,10 @@ function drawPolygon(polygonArrayArray){
 		var polygon = new google.maps.Polygon(polygonOptions);
 		
 		//文字表示
-		var latlng = calcCenterPoint(polygonArray[0]);
+		var latlng = ApiCtrl.calcCenterPoint(polygonArray[0]);
 		var str_place = {latlng: latlng, text: polygonArray[1]};
-		dispCharacter(str_place);
-		polygon_list.push(polygon);
+		ApiCtrl.dispCharacter(str_place);
+		polygonList.push(polygon);
 		
 		//ポリゴンをクリックした際のイベント定義
 		google.maps.event.addListener(polygon, 'click', (function(){
@@ -144,7 +147,7 @@ function drawPolygon(polygonArrayArray){
  * ポリゴンの中心座標を返却する。
  *
  */
-function calcCenterPoint(polygonArray){
+ApiCtrl.calcCenterPoint = function(polygonArray){
 	var zure = 0.0005;
 	var lat = 0.0;
 	var lng = 0.0;
@@ -158,10 +161,11 @@ function calcCenterPoint(polygonArray){
 
 /**
  * 
- * GoogleMapとストリートビューの画面リサイズ時の共通処理
+ * GoogleMapとストリートビューの画面リサイズ時の共通処理として、
+ * 
  *
  */
-function resizeCommonProcess(){
+ApiCtrl.resizeCommonProcess = function(){
 	var center = mapObj.getCenter();
 	google.maps.event.trigger(mapObj, "resize");
 	google.maps.event.trigger(streetViewPanorama, 'resize');
@@ -173,8 +177,8 @@ function resizeCommonProcess(){
  * GoogleMap上に表示していたマーカーを全て非表示にする。
  *
  */
-function clearAllMarker(){
-	marker_list.forEach(function(marker, idx) {
+ApiCtrl.clearAllMarker = function(){
+	markerList.forEach(function(marker, idx) {
 		marker.setMap(null);
 	});
 };
@@ -184,8 +188,8 @@ function clearAllMarker(){
  * GoogleMap上に表示していたマーカーを全て再表示する。
  *
  */
-function dispAllMarker(){
-	marker_list.forEach(function(marker, idx) {
+ApiCtrl.dispAllMarker = function(){
+	markerList.forEach(function(marker, idx) {
 		marker.setMap(mapObj);
 	});
 };
@@ -195,11 +199,11 @@ function dispAllMarker(){
  * GoogleMap上に表示していたポリゴンを全て非表示にする。
  *
  */
-function clearAllPolygon(){
-	polygon_list.forEach(function(polygon, idx) {
+ApiCtrl.clearAllPolygon = function(){
+	polygonList.forEach(function(polygon, idx) {
 		polygon.setMap(null);
 	});
-	polygon_marker_list.forEach(function(marker, idx) {
+	polygonMarkerList.forEach(function(marker, idx) {
 		marker.setMap(null);
 	});
 };
@@ -209,11 +213,11 @@ function clearAllPolygon(){
  * GoogleMap上に表示していたポリゴンを全て再表示する。
  *
  */
-function dispAllPolygon(){
-	polygon_list.forEach(function(polygon, idx) {
+ApiCtrl.dispAllPolygon = function(){
+	polygonList.forEach(function(polygon, idx) {
 		polygon.setMap(mapObj);
 	});
-	polygon_marker_list.forEach(function(marker, idx) {
+	polygonMarkerList.forEach(function(marker, idx) {
 		marker.setMap(mapObj);
 	});
 };
