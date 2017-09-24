@@ -18,7 +18,6 @@ var mapObj,												//地図オブジェクト
 
 
 //縮小時のズームレベル
-
 var CONST_MAP_SHRINK_ZOOM_LEVEL = 12,				//12:　13インチ液晶で2km範囲が入るくらい。
 	//拡大時のズームレベル
 	CONST_MAP_EXPANSION_ZOOM_LEVEL = 16;			//16:　13インチ液晶で2km範囲が入るくらい。
@@ -31,11 +30,11 @@ var CONST_MAP_SHRINK_ZOOM_LEVEL = 12,				//12:　13インチ液晶で2km範囲�
 google.maps.event.addDomListener(window, 'load', function(){
 
 	//データ取得
-	//中心座標を検索する。
-	Dao.findCenterPosition();
-	
 	//マーカーを検索する。
 	Dao.findMarkerPosition();
+	
+	//初期中心表示したいマーカーを指定する。
+	Dao.findCenterMarker("123451");
 	
 	//ポリゴン情報を検索する。
 	Dao.findPolygonPosition();

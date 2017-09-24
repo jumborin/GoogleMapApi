@@ -5,7 +5,7 @@
  * GoogleMapApiに関連する処理を記述するファイル
  */
 
-//
+//Apiを管理するオブジェクト
 var ApiCtrl = {
 	/**
 	 * 

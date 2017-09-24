@@ -11,15 +11,6 @@
 var Dao = {
 	/**
 	 *
-	 * 初期表示時の中心座標情報をセットする。
-	 *
-	 */
-	findCenterPosition: function (){
-		centerLng = 136.896734;
-		centerLat = 35.1750;
-	},
-	/**
-	 *
 	 * マーカー情報を検索し、マーカー情報をセットする。
 	 * @param {array} pinPlaces マーカーの座標情報
 	 *
@@ -203,6 +194,21 @@ var Dao = {
 			[[new google.maps.LatLng(35.169714, 136.741554999999), new google.maps.LatLng(35.169714,136.736204), new google.maps.LatLng(35.164649,136.736204), new google.maps.LatLng(35.164649,136.741555), new google.maps.LatLng(35.169714, 136.741555)],"229"],
 			[[new google.maps.LatLng(35.169714, 136.736203999999), new google.maps.LatLng(35.169714,136.730853), new google.maps.LatLng(35.164649,136.730853), new google.maps.LatLng(35.164649,136.736204), new google.maps.LatLng(35.169714, 136.736204)],"230"]
 		];
+	},
+	/**
+	 *
+	 * マーカー情報を検索し、マーカー情報をセットする。
+	 * @param {text} searchText マーカーの座標情報
+	 *
+	 */
+	findCenterMarker: function(searchText){
+		var temp_obj = $.grep(pinPlaces.list,
+			function(elem,index){
+				return (elem.text == searchText);
+			}
+		);
+		centerLng = temp_obj[0].latlng.lng();
+		centerLat = temp_obj[0].latlng.lat();
 	}
 };
 
